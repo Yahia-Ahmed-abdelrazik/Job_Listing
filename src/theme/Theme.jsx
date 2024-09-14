@@ -4,7 +4,7 @@ import { createTheme } from "@mui/material/styles";
 const primary = "#18E1D9";
 const secondary = "#0B0B15";
 
-const theme = createTheme({
+const createTheme({
   palette: {
     primary: {
       main: primary,
@@ -30,7 +30,7 @@ const theme = createTheme({
         padding: "6px 24px",
       },
       Outlined: {
-        borderRadus: "35px",
+        borderRadius: "35px",
         borderColor: secondary,
         padding: "6px 20px",
       },
@@ -49,4 +49,4 @@ const theme = createTheme({
   },
 });
 
-export default theme;
+export default createTheme;

@@ -1,11 +1,13 @@
-import { ThemeProvider } from "styled-components";
-import theme from "./theme/Theme";
+// src/App.jsx
+
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./Theme/Theme";
 
 function App() {
   return (
-    <>
-      <ThemeProvider theme={theme}></ThemeProvider>;
-    </>
+    <ThemeProvider theme={theme}>
+      <h1>hello</h1>
+    </ThemeProvider>
   );
 }
 
