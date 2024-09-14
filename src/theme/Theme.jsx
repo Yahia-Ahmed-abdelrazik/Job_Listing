@@ -4,7 +4,7 @@ import { createTheme } from "@mui/material/styles";
 const primary = "#18E1D9";
 const secondary = "#0B0B15";
 
-const createTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: primary,
@@ -49,4 +49,4 @@ const createTheme({
   },
 });
 
-export default createTheme;
+export default theme;
