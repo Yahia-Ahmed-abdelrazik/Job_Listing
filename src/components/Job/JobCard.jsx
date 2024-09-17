@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
-import { differenceInMinutes } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -34,9 +34,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function jobCard(props) {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+function JobCard(props) {
   const classes = useStyles();
+
+  // Format the postedOn date to display how long ago the job was posted
+  const timeAgo = formatDistanceToNow(new Date(props.postedOn), {
+    addSuffix: true,
+  });
+
   return (
     <Box className={classes.wrapper} p={2}>
       <Grid container spacing={2} alignItems={"center"}>
@@ -58,8 +63,7 @@ function jobCard(props) {
         <Grid item container xs direction={"column"} alignItems={"flex-end"}>
           <Grid item>
             <Typography variant="caption">
-              {differenceInMinutes(new Date(), props.postedOn)} | {props.type} |
-              {props.location}
+              {timeAgo} | {props.type} | {props.location}
             </Typography>
           </Grid>
 
@@ -74,4 +78,4 @@ function jobCard(props) {
   );
 }
 
-export default jobCard;
+export default JobCard;
