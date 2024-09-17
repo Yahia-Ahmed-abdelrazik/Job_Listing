@@ -1,3 +1,5 @@
+import { useState } from "react";
+//mui
 import {
   Box,
   Button,
@@ -15,6 +17,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { makeStyles } from "@mui/styles";
 
+//data
 const skills = [
   "Javascript",
   "React",
@@ -25,6 +28,7 @@ const skills = [
   "SQL",
 ];
 
+//styles
 const useStyles = makeStyles((theme) => ({
   skillChip: {
     margin: theme.spacing(0.5),
@@ -36,15 +40,52 @@ const useStyles = makeStyles((theme) => ({
     border: `1px solid ${theme.palette.secondary.main}`,
     color: theme.palette.secondary.main,
     cursor: "pointer",
+
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
       color: "white",
     },
   },
+  included: {
+    backgroundColor: theme.palette.secondary.main,
+    color: "white",
+  },
 }));
 
 function NewJobModal() {
+  //styles
   const classes = useStyles();
+  //state
+  const [jobDetails, setJobDetails] = useState({
+    title: "",
+    type: "full Time",
+    companyName: "",
+    companyUrl: "",
+    location: "Remote",
+    link: "",
+    description: "",
+    skills: [],
+  });
+  // console.log(jobDetails);
+
+  //handlers
+  const handleChange = (e) => {
+    setJobDetails((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  //handelSkills
+
+  const addRemoveSkill = (skill) => {
+    jobDetails.skills.includes(skill)
+      ? //remove
+        setJobDetails((prev) => ({
+          ...prev,
+          skills: prev.skills.filter((s) => s !== skill),
+        }))
+      : //add
+        setJobDetails((prev) => ({ ...prev, skills: [...prev.skills, skill] }));
+  };
+
   return (
     <Dialog open={true} fullWidth>
       <DialogTitle>
@@ -64,15 +105,25 @@ function NewJobModal() {
       <DialogContent>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <FilledInput placeholder="Job Title *" disableUnderline fullWidth />
+            <FilledInput
+              onChange={handleChange}
+              name="title"
+              value={jobDetails.title}
+              autoComplete="off"
+              placeholder="Job Title *"
+              disableUnderline
+              fullWidth
+            />
           </Grid>
 
           <Grid item xs={6}>
             <Select
+              onChange={handleChange}
+              name="type"
+              value={jobDetails.type}
               fullWidth
               variant="filled"
               disableUnderline
-              defaultValue={"full Time"}
             >
               <MenuItem value="full Time">Full Time</MenuItem>
               <MenuItem value="part Time">Part Time</MenuItem>
@@ -84,6 +135,10 @@ function NewJobModal() {
         <Grid container spacing={2} mt={1}>
           <Grid item xs={6}>
             <FilledInput
+              onChange={handleChange}
+              name="companyName"
+              value={jobDetails.companyName}
+              autoComplete="off"
               placeholder="Company Name *"
               disableUnderline
               fullWidth
@@ -92,6 +147,10 @@ function NewJobModal() {
 
           <Grid item xs={6}>
             <FilledInput
+              onChange={handleChange}
+              name="companyUrl"
+              value={jobDetails.companyUrl}
+              autoComplete="off"
               placeholder="Company URL *"
               disableUnderline
               fullWidth
@@ -102,10 +161,12 @@ function NewJobModal() {
         <Grid container spacing={2} mt={1}>
           <Grid item xs={6}>
             <Select
+              onChange={handleChange}
+              name="location"
+              value={jobDetails.location}
               fullWidth
               variant="filled"
               disableUnderline
-              defaultValue={"Remote"}
             >
               <MenuItem value="Remote">Remote</MenuItem>
               <MenuItem value="In Office">In Office</MenuItem>
@@ -113,13 +174,25 @@ function NewJobModal() {
           </Grid>
 
           <Grid item xs={6}>
-            <FilledInput placeholder="Job link *" disableUnderline fullWidth />
+            <FilledInput
+              onChange={handleChange}
+              name="link"
+              value={jobDetails.link}
+              autoComplete="off"
+              placeholder="Job link *"
+              disableUnderline
+              fullWidth
+            />
           </Grid>
         </Grid>
 
         <Grid container spacing={2} mt={1}>
           <Grid item xs={12}>
             <FilledInput
+              onChange={handleChange}
+              name="description"
+              value={jobDetails.description}
+              autoComplete="off"
               multiline
               placeholder="Job description *"
               disableUnderline
@@ -133,7 +206,14 @@ function NewJobModal() {
           <Typography variant="subtitle1">Skills</Typography>
           <Box display={"flex"}>
             {skills.map((skill) => (
-              <Box className={classes.skillChip} mx={0.5} key={skill}>
+              <Box
+                onClick={() => addRemoveSkill(skill)}
+                className={`${classes.skillChip} ${
+                  jobDetails.skills.includes(skill) ? classes.included : ""
+                } `}
+                mx={0.5}
+                key={skill}
+              >
                 {skill}
               </Box>
             ))}

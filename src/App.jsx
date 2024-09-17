@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "./Theme/Theme";
+//components
 import Header from "./components/Header/Header";
 import SearchBar from "./components/SearchBar/SerchBar";
 import JobCard from "./components/job/jobCard";
-import { Box, CircularProgress, Grid } from "@mui/material";
 import NewJobModal from "./components/Job/NewJobModal";
+//mui
+import { ThemeProvider } from "@mui/material/styles";
+import { Box, CircularProgress, Grid } from "@mui/material";
+import theme from "./Theme/Theme";
+//db
 import { db } from "./firebase/Config";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
@@ -38,7 +41,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      {/* <NewJobModal /> */}
+      <NewJobModal />
 
       <Grid container justifyContent={"center"}>
         <Grid item xs={10}>
