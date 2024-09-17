@@ -1,13 +1,20 @@
-import { Button, Grid2, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 
 function Header() {
   return (
-    <>
-      <Grid2>
-        <Typography>Open Job Listing</Typography>
-        <Button>Post a Job</Button>
-      </Grid2>
-    </>
+    <Box bgcolor={"secondary.main"} color={"white"} py={10}>
+      <Grid container justifyContent={"center"}>
+        <Grid item xs={10}>
+          <Box display={"flex"} justifyContent={"space-between"}>
+            <Typography variant="h4">Open Job Listing</Typography>
+
+            <Button variant="contained" color="primary" disableElevation>
+              Post a Job
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 

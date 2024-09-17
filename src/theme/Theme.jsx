@@ -16,34 +16,42 @@ const theme = createTheme({
   typography: {
     fontFamily: "Poppins , sans-serif",
   },
-  overrides: {
-    MuiDialogActions: {
-      root: {
-        Padding: "8px 24px 16px 24px",
-      },
-    },
+  components: {
     MuiButton: {
-      root: {
-        fontWeight: 600,
-        textTransform: "none",
-        color: secondary,
-        padding: "6px 24px",
-      },
-      Outlined: {
-        borderRadius: "35px",
-        borderColor: secondary,
-        padding: "6px 20px",
+      styleOverrides: {
+        root: {
+          fontWeight: 600,
+          textTransform: "none",
+          color: secondary,
+          padding: "6px 24px",
+        },
+        outlined: {
+          borderRadius: "35px",
+          borderColor: secondary,
+          padding: "6px 20px",
+        },
       },
     },
     MuiSelect: {
-      filled: {
-        padding: "15px 0 15px 15px",
+      styleOverrides: {
+        filled: {
+          padding: "15px 0 15px 15px",
+        },
       },
     },
     MuiFilledInput: {
-      input: {
-        height: "49px",
-        padding: "0px 0 0 10px",
+      styleOverrides: {
+        input: {
+          height: "49px",
+          padding: "0px 0 0 10px",
+        },
+      },
+    },
+    MuiDialogActions: {
+      styleOverrides: {
+        root: {
+          padding: "8px 24px 16px 24px",
+        },
       },
     },
   },
